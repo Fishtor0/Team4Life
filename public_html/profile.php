@@ -14,12 +14,12 @@ include 'db/_con.php';
 
 
 // Get email from accounts
-$stmt = $con->prepare('SELECT email, ud.given_name, ud.surname, a.street, a.house, a.city, a.postcode FROM accounts as ac
+$stmt = $con->prepare('SELECT email, ud.given_name, ud.surname, ad.street, ad.house, ad.city, ad.postcode FROM accounts as ac
 JOIN userdetails as ud
 ON ac.id = ud.user_id
-JOIN addresses as a
-on ac.id = ud.user_id
-WHERE id = ?');
+JOIN addresses as ad
+on ac.id = ad.user_id
+WHERE ac.id = ?');
 $stmt->bind_param('i', $_SESSION['id']);
 $stmt->execute();
 $stmt->bind_result($email, $given_name, $surname, $street, $house, $city, $postcode );
