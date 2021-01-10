@@ -5,7 +5,7 @@ include '../db/_con.php';
 
 
 // Now we check if the data was submitted, isset() function will check if the data exists.
-if (!isset($_POST['username'], $_POST['password'], $_POST['email'], $_POST['given_name'], $_POST['surname'], $_POST['city'], $_POST['house'], $_POST['street'], $_POST['postcode'])) {
+if (!isset($_POST['username'], $_POST['password'], $_POST['email'], $_POST['given_name'], $_POST['surname'])) {
 	// Could not get the data that should have been sent.
 	exit('Please complete the registration form!');
 }
@@ -78,8 +78,8 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
 					$stmt->close();
 
 					// prepare address insert
-					if ($stmt = $con->prepare('INSERT INTO addresses (user_id, street, house, city, postcode) VALUES (?, ?, ?, ?, ?)')) {
-						$stmt->bind_param('issss',$userid, $_POST['street'],$_POST['house'], $_POST['city'], $_POST['postcode']);
+					if ($stmt = $con->prepare('INSERT INTO addresses (user_id) VALUES (?)')) {
+						$stmt->bind_param('i',$userid);
 						$stmt->execute();
 						$stmt->close();
 

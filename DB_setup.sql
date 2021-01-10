@@ -15,9 +15,9 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 -- userdetails
  CREATE TABLE IF NOT EXISTS `userdetails` (
 	 `user_id` int NOT NULL,
-     `given_name` varchar(50) ,
-     `surname` varchar(50),
-     `mobile` varchar(20) ,
+     `given_name` varchar(50) DEFAULT '',
+     `surname` varchar(50) DEFAULT '',
+     `mobile` varchar(20) DEFAULT '',
     PRIMARY KEY (`user_id`),
     FOREIGN KEY (`user_id`) REFERENCES `accounts`(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB CHARSET=utf8;   
@@ -25,10 +25,10 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 -- addresses
 CREATE TABLE IF NOT EXISTS `addresses` (
      `user_id` int NOT NULL,
-     `street` varchar(50) ,
-     `house` varchar(20) ,
-     `city` varchar(20) ,
-     `postcode` varchar(6) ,
+     `street` varchar(50) DEFAULT '' ,
+     `house` varchar(20) DEFAULT '',
+     `city` varchar(20) DEFAULT '',
+     `postcode` varchar(6) DEFAULT '',
     PRIMARY KEY (`user_id`),
     FOREIGN KEY (`user_id`) REFERENCES `accounts`(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB CHARSET=utf8;

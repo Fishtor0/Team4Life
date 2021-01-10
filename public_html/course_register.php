@@ -12,7 +12,6 @@ if (!isset($_SESSION['loggedin'])) {
 include 'db/_con.php';
 
 
-
 // Get email from accounts
 $stmt = $con->prepare('SELECT email, ud.given_name, ud.surname, a.street, a.house, a.city, a.postcode FROM accounts as ac
 JOIN userdetails as ud
@@ -22,7 +21,7 @@ on ac.id = ud.user_id
 WHERE id = ?');
 $stmt->bind_param('i', $_SESSION['id']);
 $stmt->execute();
-$stmt->bind_result($email, $given_name, $surname, $street, $house, $city, $postcode );
+$stmt->bind_result($email, $given_name, $surname, $street,$house,$city,$postcode );
 $stmt->fetch();
 $stmt->close();
 
@@ -33,7 +32,7 @@ $stmt->close();
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Profile Page</title>
+		<title>Register on Course</title>
 		<link href="style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
@@ -41,8 +40,9 @@ $stmt->close();
 		<?php
                 include 'navBar/top';
                 ?>
+
 		<div class="content">
-			<h2>Profile Page</h2>
+			<h2>Your Details:</h2>
 			<div>
 				<p>Your account details are below:</p>
 				<table>
@@ -65,28 +65,31 @@ $stmt->close();
 				</table>
 			</div>
 			<div>
-				<p>Address:</p>
-				<table>
-					<tr>
-						<td>House number:</td>
-						<td><?=$house?></td>
-					</tr>
-					<tr>
-						<td>Street:</td>
-						<td><?=$street?></td>
-					</tr>
-					<tr>
-						<td>City:</td>
-						<td><?=$city?></td>
-					</tr>
-					<tr>
-						<td>Postcode:</td>
-						<td><?=$postcode?></td>
-					</tr>
-				</table>
-				<form action="update_details.php">
-					<input type="submit" value="Change Address" />
-				</form>
+            <div class="register">
+			<h1>Address</h1>
+			<form action="db/register_on_course.php" method="post" autocomplete="off">
+               
+				<label for="house">
+					<i class="fas fa-building "></i>
+				</label>
+				<input type="text" name="house" value="<?=$house?>" id="house" required>
+
+                <label class="no_bcg"  for="street">
+					<i class="fas "></i>
+				</label>
+                <input type="text" name="street" value="<?=$street?>" id="street" required>
+                
+				<label class="no_bcg" for="city">
+					<i class="fas "></i>
+				</label>
+				<input type="text" name="city" value="<?=$city?>" id="city" required>
+
+				<label class="no_bcg" for="postcode">
+					<i class="fas fa-building"></i>
+				</label>
+				<input type="text" name="postcode" value="<?=$postcode?>" id="postcode" required>
 				
+                <input type="submit" value="Update">
+                </form>
 	</body>
 </html>
