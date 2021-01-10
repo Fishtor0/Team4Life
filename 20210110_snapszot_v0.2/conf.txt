@@ -1,0 +1,9 @@
+Database:
+team4life: dbs1211464
+	dbu187820
+	Team4F1f3@_Wajawaja
+
+testDB: db5001443767
+	dbu708833
+	r@ndomPassword2384!
+	dbs1216474
