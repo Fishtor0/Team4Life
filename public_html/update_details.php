@@ -12,16 +12,8 @@ if (!isset($_SESSION['loggedin'])) {
 include 'db/_con.php';
 
 
-if (preg_match('/^[a-zA-Z]+$/', $_POST['given_name']) == 0) {
-    exit('Name can only contain alphabet characters!');
-}
-
-if (preg_match('/^[a-zA-Z]+$/', $_POST['surname']) == 0) {
-    exit('Surname can only contain alphabet characters!');
-}
-
 // Get email from accounts
-$stmt = $con->prepare('SELECT email, ud.given_name, ud.surname, a.street, a.house, a.city, a.postcode FROM accounts as ac
+$stmt = $con->prepare('SELECT email, ud.given_name, ud.surname, ud.mobile, a.street, a.house, a.city, a.postcode FROM accounts as ac
 JOIN userdetails as ud
 ON ac.id = ud.user_id
 JOIN addresses as a
@@ -29,7 +21,7 @@ on ac.id = ud.user_id
 WHERE id = ?');
 $stmt->bind_param('i', $_SESSION['id']);
 $stmt->execute();
-$stmt->bind_result($email, $given_name, $surname, $street,$house,$city,$postcode );
+$stmt->bind_result($email, $given_name, $surname, $mobile, $street,$house,$city,$postcode );
 $stmt->fetch();
 $stmt->close();
 
@@ -72,41 +64,41 @@ $stmt->close();
 			<label for="given_name">
 					<i class="fas fa-user"></i>
 				</label>
-				<input type="text" name="given_name" placeholder="Name" id="given_name" required>
+				<input type="text" name="given_name" placeholder="Name" id="given_name">
 
 				<label class="no_bcg" for="surname">
 					<i class="fas"></i>
 				</label>
-				<input type="text" name="surname" placeholder="Surname" id="surname" required>
+				<input type="text" name="surname" placeholder="Surname" id="surname" >
 
 				<br>
 
 				<label for="mobile">
 					<i class="fas fa-mobile"></i>
 				</label>
-				<input type="text" name="mobile" placeholder="Tel/Mobile" id="mobile" required>
+				<input type="text" name="mobile" placeholder="Tel/Mobile" id="mobile">
 
 				<br>
 
 				<label for="house">
 					<i class="fas fa-building "></i>
 				</label>
-				<input type="text" name="house" value="<?=$house?>" id="house" required>
+				<input type="text" name="house" value="<?=$house?>" placeholder="Numer" id="house">
 
                 <label class="no_bcg"  for="street">
 					<i class="fas "></i>
 				</label>
-                <input type="text" name="street" value="<?=$street?>" id="street" required>
+                <input type="text" name="street" value="<?=$street?>" placeholder="Ulica" id="street">
                 
 				<label class="no_bcg" for="city">
 					<i class="fas "></i>
 				</label>
-				<input type="text" name="city" value="<?=$city?>" id="city" required>
+				<input type="text" name="city" value="<?=$city?>" placeholder="City" id="city">
 
 				<label class="no_bcg" for="postcode">
 					<i class="fas fa-building"></i>
 				</label>
-				<input type="text" name="postcode" value="<?=$postcode?>" id="postcode" required>
+				<input type="text" name="postcode" value="<?=$postcode?>" placeholder="Postcode" id="postcode">
 				
                 <input type="submit" value="Update">
                 </form>
