@@ -12,6 +12,14 @@ if (!isset($_SESSION['loggedin'])) {
 include 'db/_con.php';
 
 
+if (preg_match('/^[a-zA-Z]+$/', $_POST['given_name']) == 0) {
+    exit('Name can only contain alphabet characters!');
+}
+
+if (preg_match('/^[a-zA-Z]+$/', $_POST['surname']) == 0) {
+    exit('Surname can only contain alphabet characters!');
+}
+
 // Get email from accounts
 $stmt = $con->prepare('SELECT email, ud.given_name, ud.surname, a.street, a.house, a.city, a.postcode FROM accounts as ac
 JOIN userdetails as ud
@@ -42,21 +50,13 @@ $stmt->close();
                 ?>
 
 		<div class="content">
-			<h2>Update Address</h2>
+			<h2>Update Details</h2>
 			<div>
 				<p>Your account details are below:</p>
 				<table>
 					<tr>
 						<td>Username:</td>
 						<td><?=$_SESSION['name']?></td>
-					</tr>
-					<tr>
-						<td>Name:</td>
-						<td><?=$given_name?></td>
-					</tr>
-					<tr>
-						<td>Surname:</td>
-						<td><?=$surname?></td>
 					</tr>
 					<tr>
 						<td>Email:</td>
@@ -66,9 +66,28 @@ $stmt->close();
 			</div>
 			<div>
             <div class="register">
-			<h1>Update Address</h1>
-			<form action="db/update_address.php" method="post" autocomplete="off">
-               
+			<h1>Update Details</h1>
+			<form action="db/update_details_engine.php" method="post" autocomplete="off">
+			   
+			<label for="given_name">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="given_name" placeholder="Name" id="given_name" required>
+
+				<label class="no_bcg" for="surname">
+					<i class="fas"></i>
+				</label>
+				<input type="text" name="surname" placeholder="Surname" id="surname" required>
+
+				<br>
+
+				<label for="mobile">
+					<i class="fas fa-mobile"></i>
+				</label>
+				<input type="text" name="mobile" placeholder="Tel/Mobile" id="mobile" required>
+
+				<br>
+
 				<label for="house">
 					<i class="fas fa-building "></i>
 				</label>

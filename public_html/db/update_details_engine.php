@@ -22,6 +22,13 @@ if ($stmt = $con->prepare('UPDATE addresses SET city = ?, house = ?, street = ?,
     $stmt->execute();
     $stmt->close();
 
+    if ($stmt = $con->prepare('UPDATE userdetails SET given_name = ?, surname = ?, mobile = ? WHERE user_id = ?')) {
+   
+        $stmt->bind_param('sssi', $_POST['given_name'], $_POST['surname'], $_POST['mobile'], $_SESSION['id']);
+        $stmt->execute();
+        $stmt->close();
+
+
     //echo 'your details have been updated';
     header('Location: ../profile.php');
 } else {

@@ -28,14 +28,6 @@ if (preg_match('/^[a-zA-Z0-9]+$/', $_POST['username']) == 0) {
     exit('Username is not valid!');
 }
 
-if (preg_match('/^[a-zA-Z]+$/', $_POST['given_name']) == 0) {
-    exit('Name can only contain alphabet characters!');
-}
-
-if (preg_match('/^[a-zA-Z]+$/', $_POST['surname']) == 0) {
-    exit('Surname can only contain alphabet characters!');
-}
-
 // character long validation 
 
 if (strlen($_POST['password']) > 20 || strlen($_POST['password']) < 5) {
@@ -72,8 +64,8 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
 				$stmt->close();
 				
 				// prepare insert to user_details table
-				if ($stmt = $con->prepare('INSERT INTO userdetails (user_id, given_name, surname, mobile) VALUES (?, ?, ?, ?)')) {
-					$stmt->bind_param('isss', $userid, $_POST['given_name'], $_POST['surname'], $_POST['mobile']);
+				if ($stmt = $con->prepare('INSERT INTO userdetails (user_id) VALUES (?)')) {
+					$stmt->bind_param('isss', $userid);
 					$stmt->execute();
 					$stmt->close();
 
