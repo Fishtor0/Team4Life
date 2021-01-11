@@ -64,8 +64,8 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
 				$stmt->close();
 				
 				// prepare insert to user_details table
-				if ($stmt = $con->prepare('INSERT INTO userdetails (user_id) VALUES (?)')) {
-					$stmt->bind_param('isss', $userid);
+				if ($stmt = $con->prepare('INSERT INTO userdetails (user_id, given_name, surname, dob) VALUES (?, ? ,?, ?)')) {
+					$stmt->bind_param('isss', $userid, $_POST['given_name'], $_POST['surname'], $_POST['dob'] );
 					$stmt->execute();
 					$stmt->close();
 

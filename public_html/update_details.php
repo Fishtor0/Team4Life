@@ -13,15 +13,15 @@ include 'db/_con.php';
 
 
 // Get email from accounts
-$stmt = $con->prepare('SELECT email, ud.given_name, ud.surname, ud.mobile, a.street, a.house, a.city, a.postcode FROM accounts as ac
+$stmt = $con->prepare('SELECT ac.email, ud.given_name, ud.surname, ud.mobile, ud.dob, ad.street, ad.house, ad.city, ad.postcode FROM accounts as ac
 JOIN userdetails as ud
 ON ac.id = ud.user_id
-JOIN addresses as a
+JOIN addresses as ad
 on ac.id = ud.user_id
-WHERE id = ?');
+WHERE ac.id = ?');
 $stmt->bind_param('i', $_SESSION['id']);
 $stmt->execute();
-$stmt->bind_result($email, $given_name, $surname, $mobile, $street,$house,$city,$postcode );
+$stmt->bind_result($email, $given_name, $surname, $mobile, $dob, $street,$house,$city,$postcode );
 $stmt->fetch();
 $stmt->close();
 
@@ -64,26 +64,27 @@ $stmt->close();
 			<label for="given_name">
 					<i class="fas fa-user"></i>
 				</label>
-				<input type="text" name="given_name" placeholder="Name" id="given_name">
+				<input type="text" name="given_name" placeholder="Name" value="<?=$given_name?>" id="given_name" required>
 
 				<label class="no_bcg" for="surname">
 					<i class="fas"></i>
 				</label>
-				<input type="text" name="surname" placeholder="Surname" id="surname" >
+				<input type="text" name="surname" placeholder="Surname" value="<?=$surname?>" id="surname" required>
 
-				<br>
+				<label  for="dob">
+					<i class="fas fa-calendar"></i>
+				</label>
+				<input type="text" name="dob" value="<?=$dob?>" id="dob" required>
 
 				<label for="mobile">
 					<i class="fas fa-mobile"></i>
 				</label>
-				<input type="text" name="mobile" placeholder="Tel/Mobile" id="mobile">
-
-				<br>
+				<input type="number" name="mobile" placeholder="Tel/Mobile" id="mobile">
 
 				<label for="house">
 					<i class="fas fa-building "></i>
 				</label>
-				<input type="text" name="house" value="<?=$house?>" placeholder="Numer" id="house">
+				<input type="text" name="house" value="<?=$house?>" placeholder="Number" id="house">
 
                 <label class="no_bcg"  for="street">
 					<i class="fas "></i>

@@ -14,7 +14,7 @@ include 'db/_con.php';
 
 
 // Get email from accounts
-$stmt = $con->prepare('SELECT email, ud.given_name, ud.surname, ud.mobile, ad.street, ad.house, ad.city, ad.postcode FROM accounts as ac
+$stmt = $con->prepare('SELECT email, ud.given_name, ud.surname, ud.mobile, ud.dob, ad.street, ad.house, ad.city, ad.postcode FROM accounts as ac
 JOIN userdetails as ud
 ON ac.id = ud.user_id
 JOIN addresses as ad
@@ -22,7 +22,7 @@ on ac.id = ad.user_id
 WHERE ac.id = ?');
 $stmt->bind_param('i', $_SESSION['id']);
 $stmt->execute();
-$stmt->bind_result($email, $given_name, $surname, $mobile, $street, $house, $city, $postcode );
+$stmt->bind_result($email, $given_name, $surname, $mobile, $dob, $street, $house, $city, $postcode );
 $stmt->fetch();
 $stmt->close();
 
@@ -68,6 +68,11 @@ $stmt->close();
 						<td>Surname:</td>
 						<td><?=$surname?></td>
 					</tr>
+					<tr>
+						<td>D.O.B:</td>
+						<td><?=$dob?></td>
+					</tr>
+
 					<tr>
 						<td>Mobile:</td>
 						<td><?=$mobile?></td>

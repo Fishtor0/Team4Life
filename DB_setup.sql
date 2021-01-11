@@ -15,8 +15,9 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 -- userdetails
  CREATE TABLE IF NOT EXISTS `userdetails` (
 	 `user_id` int NOT NULL,
-     `given_name` varchar(50) DEFAULT '',
-     `surname` varchar(50) DEFAULT '',
+     `given_name` varchar(50) NOT NULL,
+     `surname` varchar(50) NOT NULL,
+     `dob` varchar(10) NOT NULL,
      `mobile` varchar(20) DEFAULT '',
     PRIMARY KEY (`user_id`),
     FOREIGN KEY (`user_id`) REFERENCES `accounts`(`id`) ON DELETE CASCADE
@@ -39,8 +40,8 @@ CREATE TABLE IF NOT EXISTS `addresses` (
 INSERT INTO  accounts  ( `id`, `username`,  `password` ,  `email` ,  `activation_code` ) 
 VALUES (1,'test' ,  '$2y$10$SfhYIDtn.iOuCW7zfoFLuuZHX6lja4lF4XA4JqNmpiH/.P3zB8JCa' ,  'test@test.com' ,  'activated' );
 
-INSERT INTO  userdetails ( `user_id` ,  `given_name` , `surname` ) 
-VALUES (1,'john' ,  'smith' );
+INSERT INTO  userdetails ( `user_id` ,  `given_name` , `surname`,  `dob` ) 
+VALUES (1,'john' ,  'smith', '10/02/1980' );
 
 INSERT INTO  addresses  (`user_id`, `street` ,`house` , `city` , `postcode` )
 VALUES (1, 'Leszczynska' ,'6/30' , 'Leszno' , '64-100' );
