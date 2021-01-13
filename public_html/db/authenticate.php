@@ -35,7 +35,7 @@ if ($stmt->num_rows > 0) {
 		$_SESSION['id'] = $id;
         $_SESSION['account'] = $_POST['activation_code'];
 		//echo 'Welcome ' . $_SESSION['name'] . '!';
-                header('Location: ../home.php');
+                header('Location: ../home');
 	} else {
 		// Incorrect password
 		echo 'Incorrect username and/or password!';
