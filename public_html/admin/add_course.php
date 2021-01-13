@@ -29,13 +29,22 @@ if (!isset($_SESSION['loggedin'])) {
 				<label for="course_cat">
 					<i class="fas"></i>
 				</label>
-				<input type="text" name="course_cat" placeholder="Category" id="course_cat" required>
+				<input list="list1" type="text" name="course_cat" id="course_cat" required>
+				<datalist id="list1">
+					<option value="kpp">
+					<option value="pp">
+				</datalist>
 				
 				<label for="course_type">
 					<i class="fas"></i>
 				</label>
-				<input type="text" name="course_type" placeholder="Type" id="course_type" required>
-				
+				<input list="list2" type="text" name="course_type" id="course_type" required>
+				<datalist id="list2">
+					<option value="normal">
+					<option value="refresher">
+				</datalist>
+
+
 				<label for="start_date">
 					<i class="fas"></i>
 				</label>
