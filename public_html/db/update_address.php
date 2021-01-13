@@ -23,7 +23,7 @@ if ($stmt = $con->prepare('UPDATE addresses SET city = ?, house = ?, street = ?,
     $stmt->close();
 
     //echo 'your details have been updated';
-    header('Location: ../profile.php');
+    header('Location: ../user/profile.php');
 } else {
     // Something is wrong with the sql statement, check to make sure accounts table exists with all 3 fields.
     echo 'Could not update your account right now! Please contact Admin or try again later';

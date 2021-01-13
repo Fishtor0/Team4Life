@@ -1,7 +1,7 @@
 <?php
 
 //set up connection
-include 'db/_con.php';
+include '../db/_con.php';
 
 // First we check if the email and code exists...
 if (isset($_GET['email'], $_GET['code'])) {
@@ -17,7 +17,7 @@ if (isset($_GET['email'], $_GET['code'])) {
 				$newcode = 'activated';
 				$stmt->bind_param('sss', $newcode, $_GET['email'], $_GET['code']);
 				$stmt->execute();
-				echo 'Your account is now activated! You can now <a href="index.html">login</a>!';
+				echo 'Your account is now activated! You can now <a href="../index.html">login</a>!';
 			}
 		} else {
 			echo 'The account is already activated or doesn\'t exist!';

@@ -80,7 +80,7 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?'
 						$subject = 'Account Activation Required';
 						$headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
 						// Update the activation variable below
-						$activate_link = 'https://www.thellama.co.uk/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
+						$activate_link = 'https://www.thellama.co.uk/register/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
 						$message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a></p>';
 						mail($_POST['email'], $subject, $message, $headers);
 						echo 'Please check your email to activate your account!';

@@ -4,12 +4,12 @@ session_start();
 
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.html');
+	header('Location: ../index.html');
 	exit;
 }
 
 //set up connection
-include 'db/_con.php';
+include '../db/_con.php';
 
 
 
@@ -34,12 +34,12 @@ $stmt->close();
 	<head>
 		<meta charset="utf-8">
 		<title>Profile Page</title>
-		<link href="style.css" rel="stylesheet" type="text/css">
+		<link href="../style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body class="loggedin">
 		<?php
-                include 'navBar/top';
+                include '../navBar/top';
                 ?>
 		<div class="content">
 			<h2>Profile Page</h2>
@@ -97,7 +97,7 @@ $stmt->close();
 						<td><?=$postcode?></td>
 					</tr>
 				</table>
-				<form action="update_details.php">
+				<form action="../user/update_details.php">
 					<input type="submit" value="Update Details" />
 				</form>
 				

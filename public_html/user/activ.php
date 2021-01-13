@@ -1,12 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.html');
+	header('Location: ../index.html');
 	exit;
 }
 
 //set up connection
-include 'db/_con.php';
+include '../db/_con.php';
 
 
 $stmt = $con->prepare('SELECT activation_code FROM accounts WHERE id = ?');
@@ -19,7 +19,7 @@ if ($_SESSION['account'] == 'activated') {
 	// account is activated
 	// Display home page etc
 } else {
-        header('Location: index.html');
+        header('Location: ../index.html');
 	exit;
 }
 ?>
@@ -37,7 +37,7 @@ and open the template in the editor.
     </head>
     <body>
 <?php
-                include 'navBar/top';
+                include '../navBar/top';
 ?>
         <div>You are in activated area</div>
     </body>
