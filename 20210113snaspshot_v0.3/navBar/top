@@ -1,0 +1,9 @@
+<nav class="navtop">
+    <div>
+        <h1>Website Title</h1>
+        <a href="activ"><i class="fas fa-user-circle"></i>Activated</a>
+        <a href="profile"><i class="fas fa-user-circle"></i>Profile</a>
+        <a href="course_register"><i class="fas fa-user-circle"></i>Register on course</a>
+        <a href="logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+    </div>
+</nav>
