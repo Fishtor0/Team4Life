@@ -68,7 +68,7 @@ if (!isset($_SESSION['loggedin'])) {
 				<label for="price">
 					<i class="fas"></i>
 				</label><br>
-				<input type="number" name="prices" placeholder="0" id="price" required>
+				<input type="number" name="price" placeholder="0" id="price" required>
 
 				<label for="deposit">
 					<i class="fas"></i>

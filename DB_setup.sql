@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
     `start_date` varchar(10) NOT NULL,
     `end_date` varchar(10) NOT NULL,
     `spaces` int NOT NULL,
-    `status` ENUM( 'active' , 'cancelled' , 'full' , 'finished' ), 
+    `status` ENUM( 'active' , 'cancelled' , 'full' , 'finished' ) NOT NULL, 
     `price` int NOT NULL,
     `deposit` int NOT NULL, 
     PRIMARY KEY (`course_id`) 
