@@ -7,3 +7,7 @@ testDB: db5001443767
 	dbu708833
 	r@ndomPassword2384!
 	dbs1216474
+
+Server:
+	team4life
+	WajaP@R@m3dyk!

@@ -3,12 +3,11 @@
 
 CREATE TABLE IF NOT EXISTS `accounts` (
 	`id` int NOT NULL AUTO_INCREMENT,
-  	`username` varchar(50) NOT NULL,
+  	`username` varchar(50) NOT NULL UNIQUE,
   	`password` varchar(255) NOT NULL,
-  	`email` varchar(100) NOT NULL,
+  	`email` varchar(100) NOT NULL UNIQUE,
     `activation_code` varchar(50) DEFAULT '',   
-    PRIMARY KEY (`id`, `username`, `email`)
-    
+    PRIMARY KEY (`id`)    
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -52,14 +51,58 @@ VALUES (1, 'Leszczynska' ,'6/30' , 'Leszno' , '64-100' );
 CREATE TABLE IF NOT EXISTS `courses` (
     `course_id` int(11) NOT NULL AUTO_INCREMENT,
     `title` varchar(50) NOT NULL,
-    `description` varchar NOT NULL,
-    `course_cat` ENUM('kpp', 'pp' , 'driving' ) NOT NULL ,
-    `course_type` ENUM('normal', 'refresher') DEFAULT 'normal', 
+    `description` text NOT NULL,
+    `course_cat` ENUM('kpp', 'pp') NOT NULL,
+    `course_type` ENUM('normal', 'refresher') NOT NULL, 
     `start_date` varchar(10) NOT NULL,
     `end_date` varchar(10) NOT NULL,
     `spaces` int NOT NULL,
-    `status` ENUM( 'active' , 'cancelled' , 'full' , 'finished' ),  
+    `status` ENUM( 'active' , 'cancelled' , 'full' , 'finished' ), 
+    `price` int NOT NULL,
+    `deposit` int NOT NULL, 
     PRIMARY KEY (`course_id`) 
-     ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `userCourses`(
+     -- `booking_id` int(11) NOT NULL AUTO_INCREMENT,
+     `course_id` int(11) NOT NULL,
+     `user_id` int NOT NULL,
+     `paymentStatus` ENUM( 'booked','full', 'deposit', 'cancelled', 'refunded' ) NOT NULL,
+     `payed_ammount` int (10) Default 0,
+     `booking_date` varchar(10) NOT NULL,
+     PRIMARY KEY (`course_id`, `user_id`), 
+     FOREIGN KEY (`user_id`) REFERENCES `accounts`(`id`),
+     FOREIGN KEY (`course_id`) REFERENCES `courses`(`course_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- test courses
+INSERT INTO courses (`course_id`,`title`,`description`,`course_cat`, `start_date`, `end_date`, `spaces`, `status`, `price`, `deposit`)
+VALUES (1, 'KPP - Kwalifikowana pierwsza pomoc',
+ "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac ipsum eleifend, pretium quam quis, imperdiet justo. Morbi semper, leo",
+ 'kpp',
+ '13/01/2021',
+ '12/01/2021',
+ 20,
+ 'active',
+ 100,
+ 10
+ );
+
+INSERT INTO courses (`title`,`description`,`course_cat`, `start_date`, `end_date`, `spaces`, `status`, `price`, `deposit`)
+VALUES ('PP - pierwsza pomoc',
+ "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta, orci et dapibus iaculis, arcu dui ultricies eros, vel interdum",
+ 'pp',
+ '1/12/2021',
+ '12/12/2021',
+ 40,
+ 'cancelled',
+ 200,
+ 20
+ );
+
+-- assign user to course
+INSERT INTO userCourses(`course_id`, `user_id`,`booking_date`)
+VALUES ( 1, 1, '13/01/2021');
+
+INSERT INTO userCourses(`course_id`, `user_id`,`booking_date`)
+VALUES ( 2, 1, '13/01/2021');
