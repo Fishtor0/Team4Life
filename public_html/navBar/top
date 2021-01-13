@@ -4,6 +4,7 @@
         <a href="../user/activ"><i class="fas fa-user-circle"></i>Activated</a>
         <a href="../user/profile"><i class="fas fa-user-circle"></i>Profile</a>
         <a href="../user/course_register"><i class="fas fa-user-circle"></i>Register on course</a>
-        <a href="logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+         <a href="../admin/add_course"><i class="fas fa-user-circle"></i>Add course</a>
+        <a href="../logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
     </div>
 </nav>
