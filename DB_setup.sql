@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   	`username` varchar(50) NOT NULL UNIQUE,
   	`password` varchar(255) NOT NULL,
   	`email` varchar(100) NOT NULL UNIQUE,
-    `activation_code` varchar(50) DEFAULT '',   
+    `activation_code` varchar(50) DEFAULT '',
+    `account_type`  ENUM('user', 'admin') NOT NULL,  
     PRIMARY KEY (`id`)    
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

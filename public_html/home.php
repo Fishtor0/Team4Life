@@ -16,8 +16,13 @@ if (!isset($_SESSION['loggedin'])) {
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body class="loggedin">
-            <?php
-                include 'navBar/top';
+			<?php
+				if(isset($_SESSION['admin'])){
+					include 'navbar/admin_navbar';
+				}
+				else{
+				include 'navBar/top';
+				}
             ?>
 
 		
