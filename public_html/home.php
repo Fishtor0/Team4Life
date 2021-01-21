@@ -18,7 +18,7 @@ if (!isset($_SESSION['loggedin'])) {
 	<body class="loggedin">
 			<?php
 				if(isset($_SESSION['admin'])){
-					include 'navbar/admin_navbar';
+					include 'navBar/admin_navbar';
 				}
 				else{
 				include 'navBar/top';

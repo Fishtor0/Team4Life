@@ -2,7 +2,7 @@
     <div>
         <h1>Website Title</h1>
         <a href="../user/activ"><i class="fas fa-user-circle"></i>Activated</a>
-        <a href="../admin/manage_Courses"><i class="fas fa-user-circle"></i>Courses</a>
+        <a href="../admin/manage_courses"><i class="fas fa-user-circle"></i>Courses</a>
         <a href="../admin/add_course.php"><i class="fas fa-user-circle"></i>Activated</a>
         <a href="../admin/manage_users"><i class="fas fa-user-circle"></i>Users</a>
         <a href="../user/profile"><i class="fas fa-user-circle"></i>Profile</a>
