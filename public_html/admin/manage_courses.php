@@ -7,7 +7,7 @@ if ($_SESSION['admin'] == 'user') {
 	exit;
 }
 $datatable = "courses"; // MySQL table name
-$results_per_page = 20; // number of results per page
+$results_per_page = 10; // number of results per page
 
 //set up connection
 include '../db/_con.php';
