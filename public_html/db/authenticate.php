@@ -30,15 +30,15 @@ if ($stmt->num_rows > 0) {
 		// Verification success! User has logged-in!
 		// Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
 		session_regenerate_id();
-		if($account_type = 'admin'){
-			$_SESSION['admin'] = TRUE;
-		}
+		$_SESSION['admin'] = $account_type;
 		$_SESSION['loggedin'] = TRUE;
 		$_SESSION['name'] = $_POST['username'];
 		$_SESSION['id'] = $id;
         $_SESSION['account'] = $_POST['activation_code'];
 		//echo 'Welcome ' . $_SESSION['name'] . '!';
-                header('Location: ../common/home');
+		//echo 'logged in: ' . $_SESSION['loggedin'] . '!';
+		//echo 'AMIDN: ' . $_SESSION['admin'] . '!';
+               header('Location: ../common/home');
 	} else {
 		// Incorrect password
 		echo 'Incorrect username and/or password!';

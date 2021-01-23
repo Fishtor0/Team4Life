@@ -1,8 +1,7 @@
 
         <a href="../user/activ"><i class="fas fa-user-circle"></i>Activated</a>
         <a href="../admin/manage_courses"><i class="fas fa-user-circle"></i>Courses</a>
-        <a href="../admin/add_course.php"><i class="fas fa-user-circle"></i>Activated</a>
         <a href="../admin/manage_users"><i class="fas fa-user-circle"></i>Users</a>
+        <a href="../admin/add_course.php"><i class="fas fa-user-circle"></i>Add Course</a>
         <a href="../user/profile"><i class="fas fa-user-circle"></i>Profile</a>
-        <a href="../user/course_register"><i class="fas fa-user-circle"></i>Register on course</a>
         
