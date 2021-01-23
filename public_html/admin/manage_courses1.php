@@ -11,11 +11,8 @@ if ($_SESSION['admin'] == 'user') {
 //set up connection
 include '../db/_con.php';
 
-// set pages
-if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
-$start_from = ($page-1) * $results_per_page;
 $sql = 'SELECT title, description, course_cat, course_type, start_date, end_date, spaces, price, deposit 
-FROM courses ORDER BY start_date ASC LIMIT $start_from, '.$results_per_page;
+FROM courses';
 $result = $con->query($sql);
 
 if ($result->num_rows > 0) {
