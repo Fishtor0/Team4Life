@@ -1,10 +1,14 @@
 <nav class="navtop">
     <div>
-        <h1>Website Title</h1>
-        <a href="../user/activ"><i class="fas fa-user-circle"></i>Activated</a>
-        <a href="../user/profile"><i class="fas fa-user-circle"></i>Profile</a>
-        <a href="../user/course_register"><i class="fas fa-user-circle"></i>Register on course</a>
-         <a href="../admin/add_course"><i class="fas fa-user-circle"></i>Add course</a>
-        <a href="../logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+    <h1>Welcome <?php $_SESSION['name'] ?>; you are <?php $_SESSION['admin'] ?> </h1>
+    <?php
+        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 'admin'){
+            include '../navBar/admin_navbar';
+        }
+        else{
+            include '../navBar/user_navBar';
+        }			
+    ?>
+    <a href="../common/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
     </div>
 </nav>
