@@ -6,7 +6,8 @@ if ($_SESSION['admin'] == 'user') {
 	header('Location: ../common/home.php');
 	exit;
 }
-
+$datatable = "courses"; // MySQL table name
+$results_per_page = 20; // number of results per page
 
 //set up connection
 include '../db/_con.php';
@@ -14,19 +15,31 @@ include '../db/_con.php';
 // set pages
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
 $start_from = ($page-1) * $results_per_page;
-$sql = 'SELECT title, description, course_cat, course_type, start_date, end_date, spaces, price, deposit 
-FROM courses ORDER BY start_date ASC LIMIT $start_from, '.$results_per_page;
-$result = $con->query($sql);
 
-if ($result->num_rows > 0) {
-    echo "<table><tr><th>Title</th><th>Description</th><th>Category</th><th>Type</th><th>Start</th><th>End</th><th>Spaces</th><th>Price</th><th>Deposit</th></tr>";
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-      echo "<tr><td>".$row["title"]."</td><td>".$row["description"]."</td><td>".$row["course_cat"]."</td><td>".$row["course_type"]."</td><td>".$row["start_date"]."</td><td>".$row["end_date"]."</td><td>".$row["spaces"]."</td><td>".$row["price"]."</td><td>".$row["deposit"]."</td></tr>";
+$sql = "SELECT course_id, title, description, course_cat, course_type, start_date, end_date, spaces, price, deposit 
+FROM ".$datatable." ORDER BY course_id ASC LIMIT $start_from, ".$results_per_page;
+$rs_result = $con->query($sql);
+?>
+
+<table><tr><th>Title</th><th>Description</th><th>Category</th><th>Type</th><th>Start</th><th>End</th><th>Spaces</th><th>Price</th><th>Deposit</th></tr>
+ 
+<?php 
+ while($row = $rs_result->fetch_assoc()) {
+
+
+  echo "<tr><td>".$row["title"]."</td><td>".$row["description"]."</td><td>".$row["course_cat"]."</td><td>".$row["course_type"]."</td><td>".$row["start_date"]."</td><td>".$row["end_date"]."</td><td>".$row["spaces"]."</td><td>".$row["price"]."</td><td>".$row["deposit"]."</td></tr>";
     }
-    echo "</table>";
-  } else {
-    echo "0 results";
-  }
-  $con->close();
   ?>
+   </table>
+<?php 
+$sql = "SELECT COUNT(course_id) AS total FROM ".$datatable;
+$result = $con->query($sql);
+$row = $result->fetch_assoc();
+$total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
+  
+for ($i=1; $i<=$total_pages; $i++) {  // print links for all pages
+            echo "<a href='manage_courses.php?page=".$i."'";
+            if ($i==$page)  echo " class='curPage'";
+            echo ">".$i."</a> "; 
+}; 
+?>
