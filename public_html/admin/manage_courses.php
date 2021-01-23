@@ -20,6 +20,27 @@ $sql = "SELECT course_id, title, description, course_cat, course_type, start_dat
 FROM ".$datatable." ORDER BY course_id ASC LIMIT $start_from, ".$results_per_page;
 $rs_result = $con->query($sql);
 ?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>T4L - Courses</title>
+		<link href="../style.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+	</head>
+	<body class="loggedin">
+			<?php
+				
+				include '../navBar/top';
+				
+      ?>
+
+		
+		<div class="">
+			<h2>Manage courses</h2>
+			Courses table:
+		</div>
+
 
 <table><tr><th>Title</th><th>Description</th><th>Category</th><th>Type</th><th>Start</th><th>End</th><th>Spaces</th><th>Price</th><th>Deposit</th></tr>
  
@@ -43,3 +64,5 @@ for ($i=1; $i<=$total_pages; $i++) {  // print links for all pages
             echo ">".$i."</a> "; 
 }; 
 ?>
+	</body>
+</html>
