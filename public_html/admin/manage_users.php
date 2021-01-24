@@ -52,7 +52,12 @@ $rs_result = $con->query($sql);
 
 <?php 
  while($row = $rs_result->fetch_assoc()) {
-   echo "<tr><td>".$row["id"]."</td><td>".$row["username"]."</td><td>".$row["email"]."</td><td>".$row["given_name"]." " .$row["surname"]."</td><td>".$row["dob"]."</td><td>".$row["mobile"]."</td><td>".$row["house"]. " ".$row["street"]." ".$row["postcode"]." " .$row["city"]."</td></tr>";
+   echo "<tr><td>".$row["id"]."</td><td>".$row["username"]."</td><td>".$row["email"]."</td><td>".$row["given_name"]." " .$row["surname"]."</td><td>".$row["dob"]."</td><td>".$row["mobile"]."</td><td>".$row["house"]. " ".$row["street"]." ".$row["postcode"]." " .$row["city"]."</td>
+   <td>
+   <form action=\"update_user_details.php\" method=\"post\" autocomplete=\"off\">
+			<input type=\"hidden\" name=\"user_id\" id=\"user_id\" value=\"".$row['id']."\" />
+   <input type=\"submit\" value=\"Update Details\" /></form></td>
+   </tr>";
     }
   ?>
    </table>

@@ -1,30 +1,29 @@
 <?php
-// We need to use sessions, so you should always start sessions using the below code.
+
 session_start();
 
-// If the user is not logged in redirect to the login page...
-if (!isset($_SESSION['loggedin'])) {
-	header('Location: ../index.html');
+if ($_SESSION['admin'] == 'user') {
+	header('Location: ../common/home.php');
 	exit;
 }
 
 //set up connection
 include '../db/_con.php';
-
+echo 'user id:'.$_POST['user_id'];
 
 // Get email from accounts
-$stmt = $con->prepare('SELECT ac.email, ud.given_name, ud.surname, ud.mobile, ud.dob, ad.street, ad.house, ad.city, ad.postcode FROM accounts as ac
+$stmt = $con->prepare('SELECT ac.username, ac.email, ud.given_name, ud.surname, ud.mobile, ud.dob, ad.street, ad.house, ad.city, ad.postcode FROM accounts as ac
 JOIN userdetails as ud
 ON ac.id = ud.user_id
 JOIN addresses as ad
 on ac.id = ad.user_id
 WHERE ac.id = ?');
-$stmt->bind_param('i', $_SESSION['id']);
+$stmt->bind_param('i', $_POST['user_id']);
 $stmt->execute();
-$stmt->bind_result($email, $given_name, $surname, $mobile, $dob, $street,$house,$city,$postcode );
+$stmt->bind_result($username, $email, $given_name, $surname, $mobile, $dob, $street,$house,$city,$postcode );
 $stmt->fetch();
 $stmt->close();
-
+echo $mobile;
 ?>
 
 
@@ -32,7 +31,7 @@ $stmt->close();
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Profile Page</title>
+		<title>T4L - Update User</title>
 		<link href="../style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
@@ -42,13 +41,13 @@ $stmt->close();
                 ?>
 
 		<div class="content">
-			<h2>Update Details</h2>
+			<h2>Update User</h2>
 			<div>
-				<p>Your account details are below:</p>
+				<p>You are changing details for: <?=$given_name?> <?=$surname?></p>
 				<table>
 					<tr>
 						<td>Username:</td>
-						<td><?=$_SESSION['name']?></td>
+						<td><?=$username?></td>
 					</tr>
 					<tr>
 						<td>Email:</td>
@@ -59,9 +58,10 @@ $stmt->close();
 			<div>
             <div class="register">
 			<h1>Update Details</h1>
-			<form action="../db/update_details_engine.php" method="post" autocomplete="off">
-			   
+			<form action="../db/admin_update_user_details_engine.php" method="post" autocomplete="off">
+			<input type="hidden" name="user_id" id="user_id" value="<?php echo $_POST['user_id'] ?>" />
 			<label for="given_name">
+			
 					<i class="fas fa-user"></i>
 				</label>
 				<input type="text" name="given_name" placeholder="Name" value="<?=$given_name?>" id="given_name" required>
@@ -79,7 +79,7 @@ $stmt->close();
 				<label for="mobile">
 					<i class="fas fa-mobile"></i>
 				</label>
-				<input type="number" name="mobile" value="<?=$mobile?>" placeholder="Tel/Mobile" id="mobile">
+				<input type="number" name="mobile" placeholder="Tel/Mobile" id="mobile" value="<?=$mobile?>">
 
 				<label for="house">
 					<i class="fas fa-building "></i>
