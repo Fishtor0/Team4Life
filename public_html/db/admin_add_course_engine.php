@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+
+if ($_SESSION['admin'] == 'user') {
+	header('Location: ../common/home.php');
+	exit;
+}
+
 //set up connection
 include '../db/_con.php';
 
