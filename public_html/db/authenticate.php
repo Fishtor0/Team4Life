@@ -34,7 +34,8 @@ if ($stmt->num_rows > 0) {
 		$_SESSION['loggedin'] = TRUE;
 		$_SESSION['name'] = $_POST['username'];
 		$_SESSION['id'] = $id;
-        $_SESSION['account'] = $_POST['activation_code'];
+		$_SESSION['account'] = $_POST['activation_code'];
+		$_SESSION['LAST_ACTIVITY'] = time();
 		//echo 'Welcome ' . $_SESSION['name'] . '!';
 		//echo 'logged in: ' . $_SESSION['loggedin'] . '!';
 		//echo 'AMIDN: ' . $_SESSION['admin'] . '!';
