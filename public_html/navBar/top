@@ -1,8 +1,9 @@
 <nav class="navtop">
     <div>
     <h1>Welcome <?=$_SESSION['name']?> </h1>
+     <a href="../user/my_courses"><i class="fas fa-user-circle"></i><?=$my_courses_title?></a>
+        
     <?php
-    
         if ($_SESSION['admin'] == 'admin') {
             include '../navBar/admin_navbar';
         } else {

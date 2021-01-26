@@ -14,7 +14,8 @@ include '../db/_con.php';
 
 
 // Get email from accounts
-$stmt = $con->prepare('SELECT email, ud.given_name, ud.surname, ud.mobile, ud.dob, ad.street, ad.house, ad.city, ad.postcode FROM accounts as ac
+$stmt = $con->prepare('SELECT ac.email, ud.given_name, ud.surname, ud.mobile, ud.dob, ad.street, ad.house, ad.city, ad.postcode
+ FROM accounts as ac
 JOIN userdetails as ud
 ON ac.id = ud.user_id
 JOIN addresses as ad
