@@ -2,6 +2,10 @@
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
 
+
+// load helpers
+include '../helpers/_engine.php';
+
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
 	header('Location: ../index.html');
@@ -21,7 +25,7 @@ on ac.id = ud.user_id
 WHERE id = ?');
 $stmt->bind_param('i', $_SESSION['id']);
 $stmt->execute();
-$stmt->bind_result($email, $given_name, $surname, $street,$house,$city,$postcode );
+$stmt->bind_result($email, $given_name, $surname, $street, $house, $city, $postcode );
 $stmt->fetch();
 $stmt->close();
 
@@ -42,31 +46,31 @@ $stmt->close();
                 ?>
 
 		<div class="content">
-			<h2>Your Details:</h2>
+			<h2><?=$course_reg_userDetails?></h2>
+
 			<div>
-				<p>Your account details are below:</p>
 				<table>
 					<tr>
-						<td>Username:</td>
+						<td><?=$label_username?></td>
 						<td><?=$_SESSION['name']?></td>
 					</tr>
 					<tr>
-						<td>Name:</td>
+						<td><?=$label_name?></td>
 						<td><?=$given_name?></td>
 					</tr>
 					<tr>
-						<td>Surname:</td>
+						<td><?=$label_surname?></td>
 						<td><?=$surname?></td>
 					</tr>
 					<tr>
-						<td>Email:</td>
+						<td><?=$label_email?></td>
 						<td><?=$email?></td>
 					</tr>
 				</table>
 			</div>
 			<div>
             <div class="register">
-			<h1>Address</h1>
+			<h1><?=$label_address?></h1>
 			<form action="../db/register_on_course.php" method="post" autocomplete="off">
                
 				<label for="house">
@@ -88,8 +92,9 @@ $stmt->close();
 					<i class="fas fa-building"></i>
 				</label>
 				<input type="text" name="postcode" value="<?=$postcode?>" id="postcode" required>
+				<input type="hidden" name="course_id" value="<?=$_POST['course_id']?>" id="course_id">
+				<input type="submit" value="<?=$label_btn_update?>">
 				
-                <input type="submit" value="Update">
                 </form>
 	</body>
 </html>

@@ -5,11 +5,11 @@ session_start();
 // load helpers
 include '../helpers/_engine.php';
 
-if ($_SESSION['admin'] == 'user') {
-	header('Location: ../common/home.php');
+if (!isset($_SESSION['loggedin'])) {
+	header('Location: ../index.html');
 	exit;
 }
-$datatable = "courses"; // MySQL table name
+
 $results_per_page = 10; // number of results per page
 
 //set up connection
@@ -19,15 +19,15 @@ include '../db/_con.php';
 if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
 $start_from = ($page-1) * $results_per_page;
 
-$sql = "SELECT course_id, title, description, course_cat, course_type, start_date, end_date, spaces, price, deposit 
-FROM ".$datatable." ORDER BY course_id ASC LIMIT $start_from, ".$results_per_page;
+$sql = 'SELECT c.course_id, c.title, c.description, c.course_cat, c.course_type, c.start_date, c.end_date, c.price
+FROM courses as c WHERE c.status = "active"';
 $rs_result = $con->query($sql);
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title><?=$manage_courses_title?></title>
+		<title><?=$active_courses_title?></title>
 		<link href="../style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
@@ -40,21 +40,22 @@ $rs_result = $con->query($sql);
 
 		
 		<div class="">
-			<h2><?=$text_manage_course?></h2>
+			<h2><?=$text_book_course?></h2>
 			
 		</div>
 
 
-		<table><tr><th><?=$label_courseID?></th>
+<table><tr><th><?=$label_courseID?></th>
 <th><?=$label_courseTitle?></th>
 <th><?=$label_courseDesc?></th>
 <th><?=$label_courseCat?></th>
 <th><?=$label_courseType?></th>
 <th><?=$label_courseStart?></th>
 <th><?=$label_courseEnd?></th>
-<th><?=$label_courseSpaces?></th>
-<th><?=$label_coursePrice?></th>
-<th><?=$label_courseDeposit?></th></tr>
+
+<th><?=$label_coursePrice?></th></tr>
+
+ 
 <?php 
  while($row = $rs_result->fetch_assoc()) {
 
@@ -63,25 +64,23 @@ $rs_result = $con->query($sql);
   <tr>
   
   <td>#'.$row['course_id'].'</td>
-  <td><a href="../admin/view_course.php?course_id='.$row['course_id'].'">'.$row['title'].'</a> </td>
+  <td>'.$row['title'].'</td>
   <td>'.$row['description'].'</td>
   <td>'.$row['course_cat'].'</td>
   <td>'.$row['course_type'].'</td>
   <td>'.$row['start_date'].'</td>
   <td>'.$row['end_date'].'</td>
-  <td>'.$row['spaces'].'</td>
   <td>'.$row['price'].'</td>
-  <td>'.$row['deposit'].'</td>
- 
-  <td><form action="update_course.php" method="post" autocomplete="off">
+
+  <td><form action="course_register.php" method="post" autocomplete="off">
 			<input type="hidden" name="course_id" id="course_id" value="'.$row['course_id'].'" />
-   <input type="submit" value="'.$mng_course_label_submitBtn.'" /></form></td>
+   <input type="submit" value="'.$active_course_registerBtn.'" /></form></td>
    </tr>';
     }
   ?>
    </table>
 <?php 
-$sql = "SELECT COUNT(course_id) AS total FROM ".$datatable;
+$sql = 'SELECT COUNT(course_id) AS total FROM courses where status = "active"';
 $result = $con->query($sql);
 $row = $result->fetch_assoc();
 $total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results

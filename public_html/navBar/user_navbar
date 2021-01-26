@@ -1,5 +1,5 @@
 
-    <a href="../user/activ"><i class="fas fa-user-circle"></i>Activated</a>
+    <a href="../user/active_courses"><i class="fas fa-user-circle"></i>Activ Courses</a>
     <a href="../user/profile"><i class="fas fa-user-circle"></i>Profile</a>
     <a href="../user/course_register"><i class="fas fa-user-circle"></i>Register on course</a>
     
