@@ -56,7 +56,7 @@ echo $mobile;
 				</table>
 			</div>
 			<div>
-            <div class="register">
+            <div class="admin">
 			<h1>Update Details</h1>
 			<form action="../db/admin_update_user_details_engine.php" method="post" autocomplete="off">
 			<input type="hidden" name="user_id" id="user_id" value="<?php echo $_POST['user_id'] ?>" />
@@ -86,27 +86,25 @@ echo $mobile;
 					<i class="fas fa-mobile"></i>
 				</label>
 				<input type="number" name="mobile" placeholder="Tel/Mobile" id="mobile" value="<?=$mobile?>">
-
 				<label for="house">
 					<i class="fas fa-building "></i>
 				</label>
 				<input type="text" name="house" value="<?=$house?>" placeholder="Number" id="house">
 
                 <label class="no_bcg"  for="street">
-					<i class="fas "></i>
+					<i class="fas"></i>
 				</label>
                 <input type="text" name="street" value="<?=$street?>" placeholder="Ulica" id="street">
                 
 				<label class="no_bcg" for="city">
-					<i class="fas "></i>
+					<i class="fas"></i>
 				</label>
 				<input type="text" name="city" value="<?=$city?>" placeholder="City" id="city">
 
 				<label class="no_bcg" for="postcode">
-					<i class="fas fa-building"></i>
+					<i class="fas"></i>
 				</label>
 				<input type="text" name="postcode" value="<?=$postcode?>" placeholder="Postcode" id="postcode">
-				
                 <input type="submit" value="Update">
                 </form>
 	</body>

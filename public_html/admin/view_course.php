@@ -13,11 +13,12 @@ if ($_SESSION['admin'] == 'user') {
 include '../db/_con.php';
 
 
-$stmt = $con->prepare('SELECT title, description, course_cat, course_type, start_date, end_date, spaces, price, deposit, status 
+$stmt = $con->prepare('SELECT course_id, title, description, course_cat, course_type, start_date, end_date, spaces, price, deposit, status 
 FROM courses where course_id = ?');
-$stmt->bind_param('i', $_POST['course_id']);
+$stmt->bind_param('i', $_GET['course_id']);
 $stmt->execute();
 $stmt->bind_result(
+    $course_id,
     $c_title,
 	$description,
 	$course_cat,
@@ -38,20 +39,20 @@ $stmt->close();
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title><?=$upd_course_title?></title>
+		<title><?=$view_course_title?></title>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
         <link href="../style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
-		<?php	
+        <?php	
 			include '../navBar/top';		
       	?>
 		<div class="admin">
-			<h1><?=$upd_course_title?></h1>
+			<h1><?=$view_course_title?></h1>
             <form action="../db/admin_update_course_engine.php" method="post" autocomplete="off">
 			<input type="hidden" name="course_id" value="<?=$_POST['course_id']?>" id="course_id">
 			<label for="status">
-					<?=$upd_course_label_status?>
+					<?=$upd_course_label_type?>
 				</label>
 				<input list="status_list" type="text" value="<?=$status?>" name="status" id="status" required>
 				<datalist id="status_list">

@@ -51,11 +51,24 @@ $rs_result = $con->query($sql);
  while($row = $rs_result->fetch_assoc()) {
 
 
-  echo "<tr><td>".$row["course_id"]."</td><td>".$row["title"]."</td><td>".$row["description"]."</td><td>".$row["course_cat"]."</td><td>".$row["course_type"]."</td><td>".$row["start_date"]."</td><td>".$row["end_date"]."</td><td>".$row["spaces"]."</td><td>".$row["price"]."</td><td>".$row["deposit"]."</td>
-  <td><form action=\"update_course.php\" method=\"post\" autocomplete=\"off\">
-			<input type=\"hidden\" name=\"course_id\" id=\"course_id\" value=\"".$row['course_id']."\" />
-   <input type=\"submit\" value=\"Update Course\" /></form></td>
-   </tr>";
+  echo '
+  <tr>
+  
+  <td>#'.$row['course_id'].'</td>
+  <td><a href="../admin/view_course.php?course_id='.$row['course_id'].'">'.$row['title'].'</a> </td>
+  <td>'.$row['description'].'</td>
+  <td>'.$row['course_cat'].'</td>
+  <td>'.$row['course_type'].'</td>
+  <td>'.$row['start_date'].'</td>
+  <td>'.$row['end_date'].'</td>
+  <td>'.$row['spaces'].'</td>
+  <td>'.$row['price'].'</td>
+  <td>'.$row['deposit'].'</td>
+ 
+  <td><form action="update_course.php" method="post" autocomplete="off">
+			<input type="hidden" name="course_id" id="course_id" value="'.$row['course_id'].'" />
+   <input type="submit" value="'.$mng_course_label_submitBtn.'" /></form></td>
+   </tr>';
     }
   ?>
    </table>
