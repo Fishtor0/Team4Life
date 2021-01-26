@@ -11,6 +11,7 @@ if (!isset($_SESSION['loggedin'])) {
 //set up connection
 include '../db/_con.php';
 
+include '../helpers/_engine.php';
 
 
 // Get email from accounts

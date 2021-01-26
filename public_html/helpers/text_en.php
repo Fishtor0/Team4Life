@@ -13,9 +13,20 @@ $label_coursePrice = 'Price';
 $label_courseSpaces = 'Spaces';
 $label_courseDeposit = 'Deposit';
 
+// user profile form
+$label_surname = 'Surname';
+$label_name = 'Name';
+$label_username = 'Username';
+$label_email = 'email';
+
 // userCourse Form
-$payed_ammount = 'Payed';
-$paymentStatus = 'Booking';
+$label_payed_ammount = 'Payed';
+$label_paymentStatus = 'Booking';
+
+/* PAGES */
+
+// view_course
+$view_course_userList = 'Booked Users: ';
 
 /* ADMIN */
 

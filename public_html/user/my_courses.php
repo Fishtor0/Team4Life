@@ -47,8 +47,8 @@ $rs_result = $con->query($sql);
                 <th><?=$label_courseType?></th>
                 <th><?=$label_courseStart?></th>
                 <th><?=$label_courseEnd?></th>
-                <th><?=$paymentStatus?></th>
-                <th><?=$payed_ammount?></th>
+                <th><?=$label_paymentStatus?></th>
+                <th><?=$label_payed_ammount?></th>
                 </tr>
 
                 <?php 
@@ -58,7 +58,7 @@ $rs_result = $con->query($sql);
                     echo '
                     <tr>
                     
-                    <td>#'.$row['title'].'</td>
+                    <td>'.$row['title'].'</td>
                     <td>'.$row['status'].'</td>
                     <td>'.$row['course_cat'].'</td>
                     <td>'.$row['course_type'].'</td>

@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `userCourses`(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- test courses
-INSERT INTO courses (`course_id`,`title`,`description`,`course_cat`, `start_date`, `end_date`, `spaces`, `status`, `price`, `deposit`)
+INSERT INTO courses (`course_id`, `title`,`description`,`course_cat`, `start_date`, `end_date`, `spaces`, `status`, `price`, `deposit`)
 VALUES (1, 'KPP - Kwalifikowana pierwsza pomoc',
  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac ipsum eleifend, pretium quam quis, imperdiet justo. Morbi semper, leo",
  'kpp',
