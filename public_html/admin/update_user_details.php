@@ -60,6 +60,12 @@ echo $mobile;
 			<h1>Update Details</h1>
 			<form action="../db/admin_update_user_details_engine.php" method="post" autocomplete="off">
 			<input type="hidden" name="user_id" id="user_id" value="<?php echo $_POST['user_id'] ?>" />
+			<label for="email">
+			
+					<i class="fas fa-envelope"></i>
+				</label>
+				<input type="email" name="email" placeholder="example@domain.com" value="<?=$email?>" id="email" required>
+
 			<label for="given_name">
 			
 					<i class="fas fa-user"></i>
