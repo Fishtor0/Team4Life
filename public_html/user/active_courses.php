@@ -86,7 +86,7 @@ $row = $result->fetch_assoc();
 $total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
   
 for ($i=1; $i<=$total_pages; $i++) {  // print links for all pages
-            echo "<a href='manage_courses.php?page=".$i."'";
+            echo "<a href='active_courses.php?page=".$i."'";
             if ($i==$page)  echo " class='curPage'";
             echo ">".$i."</a> "; 
 }; 
