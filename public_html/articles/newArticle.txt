@@ -1,0 +1,9 @@
+This is my new article.
+
+and this is my body section
+
+now I will incude h1:
+<h1>WOW</h1>
+
+now with escape:
+\<h1\> WOW \</h1\>

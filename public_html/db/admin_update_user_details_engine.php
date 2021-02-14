@@ -17,9 +17,9 @@ if ($stmt = $con->prepare('UPDATE addresses SET city = ?, house = ?, street = ?,
     $stmt->execute();
     $stmt->close();
 
-    if ($stmt = $con->prepare('UPDATE userdetails SET given_name = ?, surname = ?, mobile = ? WHERE user_id = ?')) {
+    if ($stmt = $con->prepare('UPDATE userdetails SET given_name = ?, surname = ?, mobile = ?, dob = ? WHERE user_id = ?')) {
    
-        $stmt->bind_param('sssi', $_POST['given_name'], $_POST['surname'], $_POST['mobile'], $_POST['user_id']);
+        $stmt->bind_param('ssssi', $_POST['given_name'], $_POST['surname'], $_POST['mobile'],$_POST['dob'], $_POST['user_id']);
         $stmt->execute();
         $stmt->close();
 
